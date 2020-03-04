@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 @Api(value = "Retail",produces = MediaType.APPLICATION_JSON_VALUE,tags = {"retail"},description = "Retail Api")
 @RestController
-@RequestMapping(value = "/retail/")
+@RequestMapping(value = "/rest/retail/")
 public class RetailController {
     private static final Logger log = LoggerFactory.getLogger(RetailController.class);
 
@@ -24,7 +24,7 @@ public class RetailController {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping
+    @GetMapping(value = "/test")
     public String test() {
         log.info("Retail Service is up and running");
         return "Retail Service is up and running" + new Date();
