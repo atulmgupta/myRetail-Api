@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.target.retail.entity.jwt.JwtRequest;
 import com.target.retail.entity.jwt.JwtResponse;
 import com.target.retail.service.user.JwtUserDetailsService;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {

@@ -1,5 +1,9 @@
 package com.target.retail.entity.product;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 public enum CurrencyCode {
 	USD("USD", "US Dollar"), INR("INR", "Indian Rupee");
 

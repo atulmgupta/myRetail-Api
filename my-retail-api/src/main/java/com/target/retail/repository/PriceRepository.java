@@ -5,7 +5,11 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.target.retail.entity.product.PriceDetail;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 public interface PriceRepository extends CrudRepository<PriceDetail, Integer> {
     Optional<PriceDetail> findById(Integer id);
 

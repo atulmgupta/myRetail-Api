@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @Document(value = "priceDetail")
 public class PriceDetail implements Serializable {
 

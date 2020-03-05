@@ -1,7 +1,11 @@
 package com.target.retail.dao;
 
 import java.util.List;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 public interface Dao<T> {
 	T get(String id);
 

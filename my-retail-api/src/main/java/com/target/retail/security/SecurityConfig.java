@@ -16,7 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.target.retail.service.user.JwtUserDetailsService;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

@@ -23,6 +23,13 @@ import com.target.retail.service.retail.RetailService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
+
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @CrossOrigin
 @Api(value = "Retail", produces = MediaType.APPLICATION_JSON_VALUE, tags = { "retail" }, description = "Retail Api")
 @RestController
@@ -35,7 +42,7 @@ public class RetailController {
 
 	@Autowired
 	RetailService retailService;
-	
+
 	@Autowired
 	ObjectMapper mapper;
 
@@ -52,11 +59,11 @@ public class RetailController {
 		System.out.println(mapper.writeValueAsString(productDetail));
 		log.info("Retail Service is up and running");
 		log.info(mapper.writeValueAsString(new PriceDetail()));
-		
+
 		ProductDetail detail = new ProductDetail();
 		detail.setId(150);
 		detail.setName("Demo");
-	
+
 		return detail;
 	}
 
@@ -65,10 +72,11 @@ public class RetailController {
 	@PutMapping(value = "/{id}")
 	public ProductDetail putProductDetails(@PathVariable("id") Integer id, @RequestBody ProductDetail productDetail) {
 		log.info("Retail Service is up and running");
-		
+
 		return null;
 	}
 
+	@ApiIgnore
 	@SpanName("addProductDetails")
 	@ApiOperation("Add Product")
 	@PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
@@ -77,6 +85,7 @@ public class RetailController {
 		return retailService.addProduct(productDetail);
 	}
 
+	@ApiIgnore
 	@SpanName("addPriceDetails")
 	@PostMapping(value = "/addprice", consumes = "application/json", produces = "application/json")
 	public PriceDetail addPriceDetails(@RequestBody PriceDetail priceDetail) {

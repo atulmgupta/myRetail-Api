@@ -1,5 +1,9 @@
 package com.target.retail.entity.user;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 public class User {
 	private String username;
 	private String password;

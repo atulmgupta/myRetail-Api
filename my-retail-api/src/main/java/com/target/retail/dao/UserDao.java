@@ -7,6 +7,11 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.target.retail.entity.user.User;
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @Component
 public class UserDao implements Dao<User> {
 	List<User> users = new ArrayList<User>();

@@ -5,7 +5,11 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @Document(collection = "productDetail")
 public class ProductDetail implements Serializable {
 	/**

@@ -10,63 +10,66 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 @Component
 @Aspect
 public class TracingAspect {
-    @Value("${spring.application.name:myRetail}")
-    private String appName;
+	@Value("${spring.application.name:myRetail}")
+	private String appName;
 
+	@Autowired
+	private Tracer tracer;
 
-    @Autowired
-    private Tracer tracer;
+	private ScopedSpan startNewSpan(String serviceName, String methodSignature, Object... objects) {
+		// Span name contains class and method name
+		final StringBuilder spanNameBuilder = new StringBuilder("/").append(methodSignature);
 
+		final ScopedSpan span = tracer.startScopedSpan(spanNameBuilder.toString());
+		if (span != null) {
+			span.tag("peer.service", serviceName);
+		}
 
-    private ScopedSpan startNewSpan(String serviceName, String methodSignature, Object... objects) {
-        // Span name contains class and method name
-        final StringBuilder spanNameBuilder = new StringBuilder("/").append(methodSignature);
+		return span;
+	}
 
-        final ScopedSpan span = tracer.startScopedSpan(spanNameBuilder.toString());
-        if (span != null) {
-            span.tag("peer.service", serviceName);
-        }
+	private void addErrorDetailsToSpan(ScopedSpan span, Throwable throwable) {
+		if (span == null) {
+			return;
+		}
 
-        return span;
-    }
+		span.error(throwable);
+	}
 
-    private void addErrorDetailsToSpan(ScopedSpan span, Throwable throwable) {
-        if (span == null) {
-            return;
-        }
+	private void closeSpan(ScopedSpan span) {
+		if (span == null) {
+			return;
+		}
 
-        span.error(throwable);
-    }
+		span.finish();
+	}
 
-    private void closeSpan(ScopedSpan span) {
-        if (span == null) {
-            return;
-        }
+	@Around("execution(public * com.target.retail..*(..))")
+	public Object traceAllMethodCalls(ProceedingJoinPoint pJoinPoint) throws Throwable {
+		final MethodSignature methodSignature = (MethodSignature) pJoinPoint.getSignature();
+		final String serviceName = appName;
 
-        span.finish();
-    }
-
-    @Around("execution(public * com.target.retail..*(..))")
-    public Object traceAllMethodCalls(ProceedingJoinPoint pJoinPoint) throws Throwable {
-        final MethodSignature methodSignature = (MethodSignature) pJoinPoint.getSignature();
-        final String serviceName = appName;
-
-        final String targetMethodSignature = methodSignature.toShortString();
-        Object[] arguments = pJoinPoint.getArgs();
-        for (Object object : arguments) {
-            System.out.println("myRetail : " + object);
-        }
-        final ScopedSpan span = startNewSpan(serviceName, targetMethodSignature,arguments);
-        try {
-            return pJoinPoint.proceed();
-        } catch (Exception exception) {
-            addErrorDetailsToSpan(span, exception);
-            throw exception;
-        } finally {
-            closeSpan(span);
-        }
-    }
+		final String targetMethodSignature = methodSignature.toShortString();
+		Object[] arguments = pJoinPoint.getArgs();
+		for (Object object : arguments) {
+			System.out.println("myRetail : " + object);
+		}
+		final ScopedSpan span = startNewSpan(serviceName, targetMethodSignature, arguments);
+		try {
+			return pJoinPoint.proceed();
+		} catch (Exception exception) {
+			addErrorDetailsToSpan(span, exception);
+			throw exception;
+		} finally {
+			closeSpan(span);
+		}
+	}
 }
