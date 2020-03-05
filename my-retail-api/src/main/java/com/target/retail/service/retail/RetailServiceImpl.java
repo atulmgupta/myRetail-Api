@@ -1,6 +1,8 @@
 package com.target.retail.service.retail;
 
 import com.target.retail.entity.product.ProductDetail;
+import com.target.retail.entity.product.PriceDetail;
+import com.target.retail.repository.PriceRepository;
 import com.target.retail.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class RetailServiceImpl implements RetailService{
 	@Autowired
 	ProductRepository productRepository;
 
+	@Autowired
+	PriceRepository priceRepo;
+	
 	@Override
 	public ProductDetail getProductDetailById(Integer id) {
 		return null;
@@ -31,6 +36,12 @@ public class RetailServiceImpl implements RetailService{
 			return  true;
 		}
 		return false;
+	}
+
+	@Override
+	public PriceDetail addPrice(PriceDetail price) {
+		
+		return priceRepo.save(price);
 	}
 
 }

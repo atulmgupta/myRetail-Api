@@ -9,18 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 
 public class PriceCustomRepositoryImpl implements PriceCustomRepository {
-    @Autowired
-    MongoOperations mongoOperations;
-    @Autowired
-    ObjectMapper mapper;
-    private static final Logger log = LoggerFactory.getLogger(PriceCustomRepositoryImpl.class );
-    @Override
-    public ProductDetail findById(Integer id) {
-        return null;
-    }
+	@Autowired
+	MongoOperations mongoOperations;
+	@Autowired
+	ObjectMapper mapper;
+	private static final Logger log = LoggerFactory.getLogger(PriceCustomRepositoryImpl.class);
 
-    @Override
-    public ProductDetail update(Integer id, ProductDetail productDetail) {
-        return null;
-    }
+	@Override
+	public ProductDetail findById(Integer id) {
+		return null;
+	}
+
+	@Override
+	public ProductDetail update(Integer id, ProductDetail productDetail) {
+		return null;
+	}
 }
