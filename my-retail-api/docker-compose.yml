@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_retail
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - /home/atul/Documents/garage/mongo-docker-data:/data/db
+    ports:
+      - '27017:27017'
+
+  redis:
+    image: redis:alpine
+    container_name: redis_retail
+    restart: always
+    ports:
+      - '6379:6379'
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger_retail
+    restart: always
+    ports:
+      - '5775:5775/udp'
+      - '6831:6831/udp'
+      - '6832:6832/udp'
+      - '5778:5778'
+      - '16686:16686'
+      - '14268:14268'
+      - '9411:9411'
+
+  apr:
+    build: .
+    container_name: retail_api
+    restart: always
+    depends_on:
+      - mongo
+      - redis
+      - jaeger
+    ports:
+      - '8096:8096'
