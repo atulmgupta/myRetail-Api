@@ -1,6 +1,7 @@
 package com.target.retail.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -11,14 +12,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
-@EnableSwagger2
+@Component
 public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).groupName("My Retail API")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.cre8techlabs.finance.controller"))
-                .paths(PathSelectors.ant("/rest/retail/*"))
+                .apis(RequestHandlerSelectors.basePackage("com.target.retail.controller"))
+                .paths(PathSelectors.ant("/products/*"))
                 .build()
                 .apiInfo(apiInfo());
     }

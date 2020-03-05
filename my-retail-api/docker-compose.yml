@@ -9,7 +9,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
-      - /home/atul/Documents/garage/mongo-docker-data:/data/db
+      - /Volumes/AtulMac/Github/myretail-mongo-data:/data/db
     ports:
       - '27017:27017'
 
@@ -33,13 +33,13 @@ services:
       - '14268:14268'
       - '9411:9411'
 
-  apr:
-    build: .
-    container_name: retail_api
-    restart: always
-    depends_on:
-      - mongo
-      - redis
-      - jaeger
-    ports:
-      - '8096:8096'
+#  my-retail:
+#    build: .
+#    container_name: retail_api
+#    restart: always
+#    depends_on:
+#      - mongo
+#      - redis
+#      - jaeger
+#    ports:
+#      - '8096:8096'

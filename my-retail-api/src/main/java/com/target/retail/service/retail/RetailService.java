@@ -1,6 +1,6 @@
-package com.target.retail.service;
+package com.target.retail.service.retail;
 
-import com.target.retail.entity.ProductDetail;
+import com.target.retail.entity.product.ProductDetail;
 /**
  * 
  * @author atulgupta
@@ -21,4 +21,7 @@ public interface RetailService {
 	 * @return
 	 */
 	ProductDetail putProductDetailById(Integer id,ProductDetail productDetail);
+
+
+	boolean addProduct(ProductDetail productDetail);
 }

@@ -6,6 +6,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class TracingAspect {
     private String appName;
 
 
-//    @Inject
+    @Autowired
     private Tracer tracer;
 
 
@@ -48,7 +49,7 @@ public class TracingAspect {
         span.finish();
     }
 
-    @Around("execution(public * com.target..*(..))")
+    @Around("execution(public * com.target.retail..*(..))")
     public Object traceAllMethodCalls(ProceedingJoinPoint pJoinPoint) throws Throwable {
         final MethodSignature methodSignature = (MethodSignature) pJoinPoint.getSignature();
         final String serviceName = appName;

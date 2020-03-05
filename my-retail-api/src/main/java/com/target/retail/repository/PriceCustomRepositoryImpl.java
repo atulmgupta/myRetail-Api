@@ -1,7 +1,8 @@
 package com.target.retail.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.target.retail.entity.ProductDetail;
+import com.target.retail.entity.product.ProductDetail;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

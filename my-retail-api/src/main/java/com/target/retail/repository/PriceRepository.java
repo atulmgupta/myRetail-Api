@@ -1,7 +1,8 @@
 package com.target.retail.repository;
 
-import com.target.retail.entity.ProductDetail;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.target.retail.entity.product.ProductDetail;
 
 import java.util.Optional;
 

@@ -1,5 +1,6 @@
 package com.target.retail.config;
 
+import io.jaegertracing.spi.Sampler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,4 +17,5 @@ public class ApplicationConfig {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
 }
