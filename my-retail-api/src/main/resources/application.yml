@@ -1,0 +1,8 @@
+server:
+  port: 8097
+spring:
+  data:
+    mongodb:
+      database: myRetail
+      username: myRetail
+      password: myRetail
