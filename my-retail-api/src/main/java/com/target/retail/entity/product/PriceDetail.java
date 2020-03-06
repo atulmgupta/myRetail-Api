@@ -19,13 +19,13 @@ public class PriceDetail implements Serializable {
 	@JsonIgnore
 	private Integer id;
 
-	private BigDecimal price;
+	private BigDecimal value;
 
 	private CurrencyCode currency_code = CurrencyCode.USD;
 
-	public PriceDetail(Integer id, BigDecimal price, CurrencyCode currency_code) {
+	public PriceDetail(Integer id, BigDecimal value, CurrencyCode currency_code) {
 		this.id = id;
-		this.price = price;
+		this.value = value;
 		this.currency_code = currency_code;
 	}
 
@@ -41,12 +41,12 @@ public class PriceDetail implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getValue() {
+		return value;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
 
 	public CurrencyCode getCurrency_code() {

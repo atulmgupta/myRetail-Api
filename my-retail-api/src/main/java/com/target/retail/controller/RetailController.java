@@ -81,7 +81,7 @@ public class RetailController {
 		log.info("Retail Service is up and running");
 		boolean result = retailService.putProductDetailById(id, productDetail);
 		if (result)
-			return "Updated Successfully";
+			return "Prooduct price with id "+ id + " has been updated Successfully";
 		throw new RetailException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "Internal server Error");
 	}
 
