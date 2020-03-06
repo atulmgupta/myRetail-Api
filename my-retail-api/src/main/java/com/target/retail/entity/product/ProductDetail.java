@@ -22,6 +22,16 @@ public class ProductDetail implements Serializable {
 	private String name;
 
 	private PriceDetail current_price;
+	
+	public ProductDetail(Integer id,String name,PriceDetail detail) {
+		this.id = id;
+		this.name = name;
+		this.current_price = detail;
+	}
+	
+	public ProductDetail() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Integer getId() {
 		return id;

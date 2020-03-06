@@ -6,6 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class TracingAspect {
+	
+	private static final Logger log = LoggerFactory.getLogger(TracingAspect.class);
+
 	@Value("${spring.application.name:myRetail}")
 	private String appName;
 
@@ -52,7 +57,7 @@ public class TracingAspect {
 		span.finish();
 	}
 
-	@Around("execution(public * com.target.retail..*(..))")
+	@Around("execution(public * com.target..*(..))")
 	public Object traceAllMethodCalls(ProceedingJoinPoint pJoinPoint) throws Throwable {
 		final MethodSignature methodSignature = (MethodSignature) pJoinPoint.getSignature();
 		final String serviceName = appName;
@@ -60,7 +65,7 @@ public class TracingAspect {
 		final String targetMethodSignature = methodSignature.toShortString();
 		Object[] arguments = pJoinPoint.getArgs();
 		for (Object object : arguments) {
-			System.out.println("myRetail : " + object);
+			log.info("myRetail : " + object);
 		}
 		final ScopedSpan span = startNewSpan(serviceName, targetMethodSignature, arguments);
 		try {

@@ -3,9 +3,9 @@ server:
 spring:
   data:
     mongodb:
-      database: ${database_name:myRetail}
-      username: ${database_username:myRetail}
-      password: ${database_password:myRetail}
+      database: ${database_name:admin}
+      username: ${database_username:admin}
+      password: ${database_password:admin}
       host: ${database_host:localhost}
       port: ${database_port:27017}
   redis:

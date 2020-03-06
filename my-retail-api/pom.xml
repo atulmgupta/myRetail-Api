@@ -140,6 +140,12 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.wnameless/json-flattener -->
+		<dependency>
+			<groupId>com.github.wnameless</groupId>
+			<artifactId>json-flattener</artifactId>
+			<version>0.7.1</version>
+		</dependency>
 
 	</dependencies>
 	<dependencyManagement>

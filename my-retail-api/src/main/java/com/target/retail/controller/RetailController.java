@@ -1,8 +1,13 @@
 package com.target.retail.controller;
 
+import com.target.retail.exception.ProductNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.cloud.sleuth.SpanName;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.target.retail.entity.product.PriceDetail;
 import com.target.retail.entity.product.ProductDetail;
+import com.target.retail.exception.RetailException;
 import com.target.retail.service.retail.RetailService;
 
 import io.swagger.annotations.Api;
@@ -50,27 +56,25 @@ public class RetailController {
 		this.restTemplate = restTemplate;
 	}
 
+	@Cacheable(value = "product", keyGenerator = "customKeyGenerator")
 	@SpanName("getProductDetails")
 	@ApiOperation("Get product by id")
 	@GetMapping(value = "/{id}")
-	public ProductDetail getProductDetails(@PathVariable("id") Integer id) throws JsonProcessingException {
-		ProductDetail productDetail = new ProductDetail();
-		ObjectMapper mapper = new ObjectMapper();
-		System.out.println(mapper.writeValueAsString(productDetail));
+	public ProductDetail getProductDetails(@PathVariable("id") Integer id)
+			throws JsonProcessingException, RetailException, ProductNotFoundException {
+		
 		log.info("Retail Service is up and running");
-		log.info(mapper.writeValueAsString(new PriceDetail()));
 
-		ProductDetail detail = new ProductDetail();
-		detail.setId(150);
-		detail.setName("Demo");
-
+		ProductDetail detail = retailService.getProductDetailById(id);
 		return detail;
 	}
 
+	@Caching(evict = { @CacheEvict(value = "product", keyGenerator = "customKeyGenerator") }, put = {
+			@CachePut(value = "product", key = "customKeyGenerator") })
 	@SpanName("putProductDetails")
 	@ApiOperation("Update Product Details")
 	@PutMapping(value = "/{id}")
-	public ProductDetail putProductDetails(@PathVariable("id") Integer id, @RequestBody ProductDetail productDetail) {
+	public ProductDetail putProductDetails(@PathVariable("id") String id, @RequestBody ProductDetail productDetail) {
 		log.info("Retail Service is up and running");
 
 		return null;
@@ -85,8 +89,8 @@ public class RetailController {
 		return retailService.addProduct(productDetail);
 	}
 
-	@ApiIgnore
-	@SpanName("addPriceDetails")
+//	@ApiIgnore
+	@SpanName("addprice")
 	@PostMapping(value = "/addprice", consumes = "application/json", produces = "application/json")
 	public PriceDetail addPriceDetails(@RequestBody PriceDetail priceDetail) {
 		log.info("Retail Service is up and running");
