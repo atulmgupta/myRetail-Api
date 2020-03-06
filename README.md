@@ -33,28 +33,27 @@ Your goal is to create a RESTful service that can retrieve product and price det
 
   - http://localhost:8097/authenticate/ (POST)
   -     To generate jwt token
-  ![alt text](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Generate-JwtToken.jpg)
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Generate-JwtToken.jpg)
   - http://localhost:8097/products/{id} (GET)
   -     To get product by id
-  -     ![myRetail-Api](/snapshots/product-found.jpg)
-  -     ![myRetail-Api](/snapshots/product-notfound.jpg)
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/product-found.jpg)
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/product-notfound.jpg)
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/product-apiDown.jpg)
   - http://localhost:8097/products/{id} (PUT)
   -     To update product details
-  -     ![myRetail-Api](/snapshots/put-price.jpg)
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/put-price.jpg)
   - http://localhost:8097/actuator/heath (GET) 
   -     To monitor status of the rest api
   - http://localhost:8097/swagger-ui.html 
   -     Access Swagger UI for API documentation
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Swagger_UI.jpg)
   - http://localhost:16686/search 
   -     Tracing Details
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Jaeger.jpg)
+  ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Jaeger-error.jpg)
   - MongoDB (NoSQL-DB)
   - Redis (Caching)
   - JWT (Authentication Mechanism)
-  - Jaeger (Tracing/Logging)
-  - ![myRetail-Api](/snapshots/Jaeger.jpg)
-  - ![myRetail-Api](/snapshots/Jaeger-error.jpg)
-  - Swagger
-  - ![myRetail-Api](/snapshots/Swagger_UI.jpg)
   - Docker (deployment)
   
 ### Deployment
