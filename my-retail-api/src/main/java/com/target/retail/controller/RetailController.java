@@ -94,7 +94,7 @@ public class RetailController {
 		return retailService.addProduct(productDetail);
 	}
 
-//	@ApiIgnore
+	@ApiIgnore
 	@SpanName("addprice")
 	@PostMapping(value = "/addprice", consumes = "application/json", produces = "application/json")
 	public PriceDetail addPriceDetails(@RequestBody PriceDetail priceDetail) {
