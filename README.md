@@ -33,7 +33,7 @@ Your goal is to create a RESTful service that can retrieve product and price det
 
   - http://localhost:8097/authenticate/ (POST)
   -     To generate jwt token
-  -     ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snapshots/Generate-JwtToken.jpg)
+  -     ![alt text](https://github.com/atulmgupta/myRetail-Api/blob/master/snapshots/Generate-JwtToken.jpg)
   - http://localhost:8097/products/{id} (GET)
   -     To get product by id
   -     ![myRetail-Api](/snapshots/product-found.jpg)
