@@ -1,7 +1,5 @@
 package com.target.retail.controller;
 
-import com.target.retail.exception.ProductNotFoundException;
-
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.target.retail.entity.product.PriceDetail;
 import com.target.retail.entity.product.ProductDetail;
+import com.target.retail.exception.ProductNotFoundException;
 import com.target.retail.exception.RetailException;
 import com.target.retail.service.retail.RetailService;
 
@@ -63,7 +60,7 @@ public class RetailController {
 	@ApiOperation("Get product by id")
 	@GetMapping(value = "/{id}")
 	public ProductDetail getProductDetails(@PathVariable("id") Integer id)
-			throws ProductNotFoundException,RetailException,Exception {
+			throws ProductNotFoundException, RetailException, Exception {
 
 		log.info("Retail Service is up and running");
 
@@ -82,7 +79,7 @@ public class RetailController {
 		boolean result = retailService.putProductDetailById(id, productDetail);
 
 		if (result)
-			return "Prooduct price with id "+ id + " has been updated Successfully";
+			return "Prooduct price with id " + id + " has been updated Successfully";
 		throw new RetailException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "Internal server Error");
 	}
 
@@ -95,11 +92,4 @@ public class RetailController {
 		return retailService.addProduct(productDetail);
 	}
 
-	@ApiIgnore
-	@SpanName("addprice")
-	@PostMapping(value = "/addprice", consumes = "application/json", produces = "application/json")
-	public PriceDetail addPriceDetails(@RequestBody PriceDetail priceDetail) {
-		log.info("Retail Service is up and running");
-		return retailService.addPrice(priceDetail);
-	}
 }

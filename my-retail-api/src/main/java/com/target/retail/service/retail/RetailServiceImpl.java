@@ -1,19 +1,16 @@
 package com.target.retail.service.retail;
 
-import com.target.retail.entity.product.ProductDetail;
-import com.target.retail.exception.PriceNotFoundException;
-import com.target.retail.exception.ProductNotFoundException;
-import com.target.retail.exception.RetailException;
-import com.target.retail.entity.product.PriceDetail;
-import com.target.retail.repository.PriceRepository;
-import com.target.retail.repository.ProductRepository;
-import com.target.retail.service.product.RemoteProductService;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import com.target.retail.entity.product.ProductDetail;
+import com.target.retail.exception.ProductNotFoundException;
+import com.target.retail.exception.RetailException;
+import com.target.retail.repository.ProductRepository;
+import com.target.retail.service.product.RemoteProductService;
 
 /**
  * 
@@ -26,18 +23,18 @@ public class RetailServiceImpl implements RetailService {
 	ProductRepository productRepository;
 
 	@Autowired
-	PriceRepository priceRepo;
-	@Autowired
 	RemoteProductService remoteService;
 
 	@Override
 	public ProductDetail getProductDetailById(Integer id) throws Exception {
 		try {
 			String productName = remoteService.getProductNameById(id);
-			PriceDetail detail = getPriceDetailById(id);
-			ProductDetail productDetail = new ProductDetail(id, productName, detail);
-			return productDetail;
-		} catch (RetailException | ProductNotFoundException | PriceNotFoundException e) {
+			Optional<ProductDetail> detail = productRepository.findById(id);
+			if (!detail.isPresent())
+				throw new ProductNotFoundException(HttpStatus.NOT_FOUND.value(), "Price detail not found");
+			detail.get().setName(productName);
+			return detail.get();
+		} catch (RetailException | ProductNotFoundException e) {
 			throw e;
 		} catch (Exception e) {
 			throw new RetailException(HttpStatus.NOT_FOUND.value(), "Internal server error");
@@ -47,9 +44,8 @@ public class RetailServiceImpl implements RetailService {
 	@Override
 	public boolean putProductDetailById(Integer id, ProductDetail productDetail)
 			throws RetailException, ProductNotFoundException {
-		PriceDetail detail = productDetail.getCurrent_price();
-		detail.setId(id);
-		PriceDetail res = priceRepo.save(detail);
+
+		ProductDetail res = productRepository.save(productDetail);
 		if (res != null)
 			return true;
 
@@ -64,21 +60,6 @@ public class RetailServiceImpl implements RetailService {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public PriceDetail addPrice(PriceDetail price) {
-
-		return priceRepo.save(price);
-	}
-
-	@Override
-	public PriceDetail getPriceDetailById(Integer id) throws PriceNotFoundException {
-		Optional<PriceDetail> detail = priceRepo.findById(id);
-		if (detail.isPresent())
-			return detail.get();
-		throw new PriceNotFoundException(HttpStatus.NOT_FOUND.value(), "Price not found");
-
 	}
 
 }

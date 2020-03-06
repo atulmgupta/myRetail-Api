@@ -1,8 +1,6 @@
 package com.target.retail.service.retail;
 
-import com.target.retail.entity.product.PriceDetail;
 import com.target.retail.entity.product.ProductDetail;
-import com.target.retail.exception.PriceNotFoundException;
 import com.target.retail.exception.ProductNotFoundException;
 import com.target.retail.exception.RetailException;
 
@@ -34,8 +32,4 @@ public interface RetailService {
 
 	boolean addProduct(ProductDetail productDetail);
 
-	PriceDetail addPrice(PriceDetail price);
-	
-	
-	PriceDetail getPriceDetailById(Integer id) throws PriceNotFoundException;
 }

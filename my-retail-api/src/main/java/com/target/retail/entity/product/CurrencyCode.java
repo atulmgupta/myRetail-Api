@@ -5,7 +5,7 @@ package com.target.retail.entity.product;
  *
  */
 public enum CurrencyCode {
-	USD("USD", "US Dollar"), INR("INR", "Indian Rupee");
+	USD("USD", "US Dollar");
 
 	String code;
 	String description;

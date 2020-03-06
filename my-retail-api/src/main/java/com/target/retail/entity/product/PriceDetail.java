@@ -16,29 +16,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class PriceDetail implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore
-	private Integer id;
 
 	private BigDecimal value;
 
 	private CurrencyCode currency_code = CurrencyCode.USD;
 
-	public PriceDetail(Integer id, BigDecimal value, CurrencyCode currency_code) {
-		this.id = id;
+	public PriceDetail(BigDecimal value, CurrencyCode currency_code) {
 		this.value = value;
 		this.currency_code = currency_code;
 	}
 
 	public PriceDetail() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public BigDecimal getValue() {
