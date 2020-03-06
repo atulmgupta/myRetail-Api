@@ -33,10 +33,14 @@ Your goal is to create a RESTful service that can retrieve product and price det
 
   - http://localhost:8097/authenticate/ (POST)
   -     To generate jwt token
+  -     ![myRetail-Api](/snapshots/Generate-JwtToken.jpg)
   - http://localhost:8097/products/{id} (GET)
   -     To get product by id
+  -     ![myRetail-Api](/snapshots/product-found.jpg)
+  -     ![myRetail-Api](/snapshots/product-notfound.jpg)
   - http://localhost:8097/products/{id} (PUT)
   -     To update product details
+  -     ![myRetail-Api](/snapshots/put-price.jpg)
   - http://localhost:8097/actuator/heath (GET) 
   -     To monitor status of the rest api
   - http://localhost:8097/swagger-ui.html 
@@ -47,6 +51,10 @@ Your goal is to create a RESTful service that can retrieve product and price det
   - Redis (Caching)
   - JWT (Authentication Mechanism)
   - Jaeger (Tracing/Logging)
+  - ![myRetail-Api](/snapshots/Jaeger.jpg)
+  - ![myRetail-Api](/snapshots/Jaeger-error.jpg)
+  - Swagger
+  - ![myRetail-Api](/snapshots/Swagger_UI.jpg)
   - Docker (deployment)
   
 ### Deployment
