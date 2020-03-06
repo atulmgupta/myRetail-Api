@@ -4,18 +4,19 @@ services:
   my-retail:
     build: .
     container_name: retail_api
-    restart: on-failure
+    restart: always
     environment:
       SPRING_APPLICATION_NAME: docker-retail
-      database_name: admin
-      database_username: admin
-      database_password: admin
-      database_host: 192.168.86.181
-      database_port: 27017
+      DATABASE_NAME: admin
+      DATABASE_USERNAME: admin
+      DATABASE_PASSWORD: admin
+      DATABASE_HOST: mongo
+      DATABASE_PORT: 27017
+      JAEGER_HOST: http://jaeger:9411/
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
-      - redis
-      - jaeger
-    links:
+      - mongo
       - redis
       - jaeger
     ports:
@@ -30,7 +31,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
-      - /Volumes/AtulMac/Github/myretail-mongo-data:/data/db
+      - mongo_data:/data/db
     ports:
       - '27017:27017'
     networks:

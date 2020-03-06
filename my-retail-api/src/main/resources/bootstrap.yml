@@ -1,19 +1,22 @@
 spring:
   application:
-    name: myRetail-api
+    name: ${SPRING_APPLICATION_NAME:myRetail-api}
   data:
     mongodb:
-      database: ${database_name:admin}
-      username: ${database_username:admin}
-      password: ${database_password:admin}
-      host: ${database_host:127.0.0.1}
-      port: ${database_port:27017}
+      database: ${DATABASE_NAME:admin}
+      username: ${DATABASE_USERNAME:admin}
+      password: ${DATABASE_PASSWORD:admin}
+      host: ${DATABASE_HOST:localhost}
+      port: ${DATABASE_PORT:27017}
   redis:
-    host: 192.168.86.181
-    port: 6379
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
     password: 9@3rcvsOTcss
   zipkin:
-    base-url: http://192.168.86.181:9411/
+    base-url: ${JAEGER_HOST:http://10.32.8.176:9411/}
+    enabled: true
+    service:
+      name: ${SPRING_APPLICATION_NAME:myRetail-api}
   sleuth:
     sampler:
       probability: 1
