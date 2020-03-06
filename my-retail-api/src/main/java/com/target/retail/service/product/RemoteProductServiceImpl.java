@@ -57,7 +57,9 @@ public class RemoteProductServiceImpl implements RemoteProductService {
 			}
 		} catch (RestClientException e) {
 			log.debug("Product API unavailable  :" + product_api_url + product_URI + productId);
-			throw new RetailException(HttpStatus.NOT_FOUND.value(), "Product Remote API unavailable");
+			throw new ProductNotFoundException(HttpStatus.NOT_FOUND.value(), "Product not found");
+		}catch (Exception e){
+			throw new RetailException(HttpStatus.NOT_FOUND.value(), "Product api not available");
 		}
 		return productName;
 	}

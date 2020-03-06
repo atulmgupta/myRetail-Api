@@ -63,7 +63,7 @@ public class RetailController {
 	@ApiOperation("Get product by id")
 	@GetMapping(value = "/{id}")
 	public ProductDetail getProductDetails(@PathVariable("id") Integer id)
-			throws Exception {
+			throws ProductNotFoundException,RetailException,Exception {
 
 		log.info("Retail Service is up and running");
 
@@ -80,6 +80,7 @@ public class RetailController {
 			throws RetailException, ProductNotFoundException {
 		log.info("Retail Service is up and running");
 		boolean result = retailService.putProductDetailById(id, productDetail);
+
 		if (result)
 			return "Prooduct price with id "+ id + " has been updated Successfully";
 		throw new RetailException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "Internal server Error");
