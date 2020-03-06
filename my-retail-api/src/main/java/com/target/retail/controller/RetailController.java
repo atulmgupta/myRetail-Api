@@ -1,6 +1,8 @@
 package com.target.retail.controller;
 
 import com.target.retail.exception.ProductNotFoundException;
+
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +63,8 @@ public class RetailController {
 	@ApiOperation("Get product by id")
 	@GetMapping(value = "/{id}")
 	public ProductDetail getProductDetails(@PathVariable("id") Integer id)
-			throws JsonProcessingException, RetailException, ProductNotFoundException {
-		
+			throws Exception {
+
 		log.info("Retail Service is up and running");
 
 		ProductDetail detail = retailService.getProductDetailById(id);
@@ -70,14 +72,17 @@ public class RetailController {
 	}
 
 	@Caching(evict = { @CacheEvict(value = "product", keyGenerator = "customKeyGenerator") }, put = {
-			@CachePut(value = "product", key = "customKeyGenerator") })
+			@CachePut(value = "product", keyGenerator = "customKeyGenerator") })
 	@SpanName("putProductDetails")
 	@ApiOperation("Update Product Details")
 	@PutMapping(value = "/{id}")
-	public ProductDetail putProductDetails(@PathVariable("id") String id, @RequestBody ProductDetail productDetail) {
+	public String putProductDetails(@PathVariable("id") Integer id, @RequestBody ProductDetail productDetail)
+			throws RetailException, ProductNotFoundException {
 		log.info("Retail Service is up and running");
-
-		return null;
+		boolean result = retailService.putProductDetailById(id, productDetail);
+		if (result)
+			return "Updated Successfully";
+		throw new RetailException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "Internal server Error");
 	}
 
 	@ApiIgnore

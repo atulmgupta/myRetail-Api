@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author atulgupta
@@ -13,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PriceDetail implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@JsonIgnore
 	private Integer id;
 
 	private BigDecimal price;
@@ -53,7 +56,5 @@ public class PriceDetail implements Serializable {
 	public void setCurrency_code(CurrencyCode currency_code) {
 		this.currency_code = currency_code;
 	}
-
-	
 
 }

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: myRetail-api
+  data:
+    mongodb:
+      database: ${database_name:admin}
+      username: ${database_username:admin}
+      password: ${database_password:admin}
+      host: ${database_host:127.0.0.1}
+      port: ${database_port:27017}
+  redis:
+    host: 192.168.86.181
+    port: 6379
+    password: 9@3rcvsOTcss
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1
+    enabled: true

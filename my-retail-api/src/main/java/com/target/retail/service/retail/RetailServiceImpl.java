@@ -31,24 +31,30 @@ public class RetailServiceImpl implements RetailService {
 	RemoteProductService remoteService;
 
 	@Override
-	public ProductDetail getProductDetailById(Integer id) throws RetailException, ProductNotFoundException {
+	public ProductDetail getProductDetailById(Integer id) throws Exception {
 		try {
-			String productName = remoteService.getProductNameById(id);			
+			String productName = remoteService.getProductNameById(id);
 			PriceDetail detail = getPriceDetailById(id);
 			ProductDetail productDetail = new ProductDetail(id, productName, detail);
 			return productDetail;
-		} catch (RetailException | ProductNotFoundException e) {
+		} catch (RetailException | ProductNotFoundException | PriceNotFoundException e) {
 			throw e;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw new RetailException(HttpStatus.NOT_FOUND.value(), "Internal server error");
 		}
 	}
 
 	@Override
-	public ProductDetail putProductDetailById(Integer id, ProductDetail productDetail)
+	public boolean putProductDetailById(Integer id, ProductDetail productDetail)
 			throws RetailException, ProductNotFoundException {
-		String productName = remoteService.getProductNameById(id);
-		return null;
+		PriceDetail detail = productDetail.getCurrent_price();
+		detail.setId(id);
+		PriceDetail res = priceRepo.save(detail);
+		if (res != null)
+			return true;
+
+		return false;
+
 	}
 
 	@Override
@@ -69,10 +75,10 @@ public class RetailServiceImpl implements RetailService {
 	@Override
 	public PriceDetail getPriceDetailById(Integer id) throws PriceNotFoundException {
 		Optional<PriceDetail> detail = priceRepo.findById(id);
-		if(detail.isPresent())
+		if (detail.isPresent())
 			return detail.get();
 		throw new PriceNotFoundException(HttpStatus.NOT_FOUND.value(), "Price not found");
-	
+
 	}
 
 }

@@ -18,8 +18,9 @@ public interface RetailService {
 	 * @return
 	 * @throws RetailException 
 	 * @throws ProductNotFoundException 
+	 * @throws Exception 
 	 */
-	ProductDetail getProductDetailById(Integer id) throws RetailException, ProductNotFoundException;
+	ProductDetail getProductDetailById(Integer id) throws RetailException, ProductNotFoundException, Exception;
 
 	/**
 	 * 
@@ -29,7 +30,7 @@ public interface RetailService {
 	 * @throws RetailException 
 	 * @throws ProductNotFoundException 
 	 */
-	ProductDetail putProductDetailById(Integer id, ProductDetail productDetail) throws RetailException, ProductNotFoundException;
+	boolean putProductDetailById(Integer id, ProductDetail productDetail) throws RetailException, ProductNotFoundException;
 
 	boolean addProduct(ProductDetail productDetail);
 

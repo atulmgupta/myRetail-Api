@@ -21,19 +21,19 @@ import java.util.Collection;
 public class MongoConfig extends AbstractMongoConfiguration {
     private static final Logger log = LoggerFactory.getLogger(MongoConfig.class);
 
-    @Value("${spring.data.mongodb.database}")
+    @Value("${spring.data.mongodb.database:admin}")
     private String database;
 
-    @Value("${spring.data.mongodb.port}")
+    @Value("${spring.data.mongodb.port:27017}")
     private String port;
 
-    @Value("${spring.data.mongodb.host}")
+    @Value("${spring.data.mongodb.host:localhost}")
     private String host;
 
-    @Value("${spring.data.mongodb.password}")
+    @Value("${spring.data.mongodb.password:admin}")
     private String password;
 
-    @Value("${spring.data.mongodb.username}")
+    @Value("${spring.data.mongodb.username:admin}")
     private String username;
 
     @Value("${spring.data.mongodb.username.max-wait:5000}")

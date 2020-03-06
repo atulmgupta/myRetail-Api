@@ -1,26 +1,8 @@
 server:
   port: ${port:8097}
-spring:
-  data:
-    mongodb:
-      database: ${database_name:admin}
-      username: ${database_username:admin}
-      password: ${database_password:admin}
-      host: ${database_host:localhost}
-      port: ${database_port:27017}
-  redis:
-    host: localhost
-    port: 6379
-  zipkin:
-    base-url: htpp://localhost:9411/
-  sleuth:
-    sampler:
-      probability: 1
-#  security:
-#    user:
-#      name: admin
+
+
 management:
   endpoint:
     health:
       enabled: true
-#      password: admin
