@@ -12,6 +12,11 @@ spring:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
     password: 9@3rcvsOTcss
+  cache:
+    cache-names: myRetail
+    redis:
+      key-prefix: retail
+      time-to-live: 100
   zipkin:
     base-url: ${JAEGER_HOST:http://10.32.8.176:9411/}
     enabled: true

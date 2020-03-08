@@ -5,6 +5,11 @@ import java.util.NoSuchElementException;
 
 import com.github.wnameless.json.flattener.JsonFlattener;
 
+/**
+ * 
+ * @author atulgupta
+ *
+ */
 public class JsonUtils {
 	@SuppressWarnings("unused")
 	public static String getPropertyValue(String jsonPayload, String property) throws NoSuchElementException {

@@ -1,5 +1,6 @@
 package com.target.retail.repository;
 
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.target.retail.entity.product.ProductDetail;
@@ -12,5 +13,6 @@ import java.util.Optional;
  *
  */
 public interface ProductRepository  extends PagingAndSortingRepository<ProductDetail,Integer> {
+	
 	Optional<ProductDetail> findById(Integer id);
 }
