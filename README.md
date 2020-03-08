@@ -31,23 +31,23 @@ Your goal is to create a RESTful service that can retrieve product and price det
   
 # Important Endpoints
 
-  - http://localhost:8097/authenticate/ (POST)
+  - http://localhost:8097/authenticate/ (POST) (open)
   -     To generate jwt token
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Generate-JwtToken.jpg)
-  - http://localhost:8097/products/{id} (GET)
+  - http://localhost:8097/products/{id} (GET) (open)
   -     To get product by id
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/product-found.jpg)
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/product-notfound.jpg)
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/product-apiDown.jpg)
-  - http://localhost:8097/products/{id} (PUT)
+  - http://localhost:8097/products/{id} (PUT) (secured)
   -     To update product details
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/put-price.jpg)
-  - http://localhost:8097/actuator/heath (GET) 
+  - http://localhost:8097/actuator/heath (GET) (open)
   -     To monitor status of the rest api
-  - http://localhost:8097/swagger-ui.html 
+  - http://localhost:8097/swagger-ui.html (open)
   -     Access Swagger UI for API documentation
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Swagger_UI.jpg)
-  - http://localhost:16686/search 
+  - http://localhost:16686/search (open)
   -     Tracing Details
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Jaeger.jpg)
   ![myRetail-Api](https://github.com/atulmgupta/myRetail-Api/blob/master/snaphots/Jaeger-error.jpg)
@@ -58,6 +58,19 @@ Your goal is to create a RESTful service that can retrieve product and price det
   
 ### Deployment
 download or clone repo https://github.com/atulmgupta/myRetail-Api.git
+
+# Configuration
+Application has exteranlized configuration setup. Update the following values for specific env.
+```sh
+DATABASE_NAME: <<DATABASE_NAME>>
+DATABASE_USERNAME: <<DATABASE_USERNAME>> 
+DATABASE_PASSWORD: <<DATABASE_PASSWORD>>
+DATABASE_HOST: <<DATABASE_HOST>>
+DATABASE_PORT: <<DATABASE_PORT>>
+JAEGER_HOST: <<JAEGER_HOST>>
+REDIS_HOST: <<REDIS_HOST>>
+REDIS_PORT: <<REDIS_PORT>>
+```
 
 ```sh
 $ cd myRetail-Api/my-retail-api
